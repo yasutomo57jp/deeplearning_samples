@@ -10,10 +10,12 @@ ImageNetで学習した1000クラス分類用caffeのモデルを読み込んで
 
 caffemodelと，ImageNetの平均画像及び1000クラス分類のクラスラベルをダウンロードしておく
 
-* wget http://dl.caffe.berkeleyvision.org/bvlc_reference_caffenet.caffemodel
-* wget https://github.com/BVLC/caffe/raw/master/python/caffe/imagenet/ilsvrc_2012_mean.npy
-* wget http://dl.caffe.berkeleyvision.org/caffe_ilsvrc12.tar.gz
-* tar zxvf caffe_ilsvrc12.tar.gz
+```bash
+wget http://dl.caffe.berkeleyvision.org/bvlc_reference_caffenet.caffemodel
+wget https://github.com/BVLC/caffe/raw/master/python/caffe/imagenet/ilsvrc_2012_mean.npy
+wget http://dl.caffe.berkeleyvision.org/caffe_ilsvrc12.tar.gz
+tar zxvf caffe_ilsvrc12.tar.gz
+```
 
 テスト用の画像を適当に準備し，255x255のカラー画像にしておく．
 ファイル名は testimage.jpg にする．
