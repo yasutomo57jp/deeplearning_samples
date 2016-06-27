@@ -15,7 +15,7 @@ from chainer import Variable
 from chainer.functions import caffe
 from chainer import cuda
 
-if len(sys.argv) > 3:
+if len(sys.argv) < 3:
     print("usage: %s imagedir outputfile" % sys.argv[0])
     quit()
 inputpath = sys.argv[1]
