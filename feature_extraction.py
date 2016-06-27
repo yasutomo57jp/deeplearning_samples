@@ -27,12 +27,6 @@ model = caffe.CaffeFunction("bvlc_reference_caffenet.caffemodel")
 model.to_gpu()
 print("done", file=sys.stderr)
 
-# ラベルの読み込み
-print("loading labels ... ", end="", file=sys.stderr)
-with open("synset_words.txt") as fin:
-    labels = fin.readlines()
-print("done", file=sys.stderr)
-
 # 平均画像の読み込み
 mean = np.load("ilsvrc_2012_mean.npy")  # 3x255x255 の画像
 
