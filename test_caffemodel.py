@@ -5,9 +5,11 @@ import cv2
 import numpy as np
 from chainer import Variable
 from chainer.functions import caffe
+from chainer import cuda
 
 # Caffeのモデル読み込み（時間がかかる）
 model = caffe.CaffeFunction("bvlc_reference_caffenet.caffemodel")
+model.to_gpu()
 
 # ラベルの読み込み
 with open("synset_words.txt") as fin:
@@ -28,13 +30,13 @@ stop = start + 227
 imgsdata = np.asarray([img[:, start:stop, start:stop]], dtype=np.float32)
 
 # chainer用の変数にする
-x = Variable(imgsdata)
+x = Variable(cuda.cupy.asarray(imgsdata))
 
 # ネットワークを通す
 y = model(inputs={"data": x}, outputs=["fc8"], train=False)
 
 # 結果を受け取る
-outputs = y[0].data  # 1000クラスそれぞれのスコア
+outputs = cuda.to_cpu(y[0].data)  # 1000クラスそれぞれのスコア
 class_id = np.argmax(outputs)  # 最大スコアのクラス番号を返す
 
 print(labels[class_id])  # クラス名を出力
