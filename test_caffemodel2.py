@@ -8,6 +8,7 @@ from __future__ import print_function
 import sys
 import os
 import os.path
+import pickle
 import cv2
 import numpy as np
 from chainer import Variable
