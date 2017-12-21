@@ -36,7 +36,7 @@ model.compile(loss='categorical_crossentropy',
 
 start = time.time()  # 処理時間の計測開始
 training = model.fit(data_train, label_train_binary,
-                     nb_epoch=100, batch_size=100, verbose=1)
+                     epochs=100, batch_size=100, verbose=1)
 training_time = time.time() - start
 with open("classifiers/keras_nn", "wb") as fout:
     import pickle

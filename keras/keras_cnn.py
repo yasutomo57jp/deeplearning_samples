@@ -6,7 +6,7 @@ from sklearn.externals import joblib
 import numpy as np
 from keras.utils.np_utils import to_categorical
 from keras.models import Sequential
-from keras.layers import Convolution2D, MaxPooling2D, Flatten
+from keras.layers import Conv2D, MaxPooling2D, Flatten
 from keras.layers import Dense, Activation, Dropout
 
 # 学習データとテストデータに分ける
@@ -35,11 +35,11 @@ label_train_binary = to_categorical(label_train)
 
 model = Sequential()
 
-model.add(Convolution2D(32, 3, 3, border_mode='same', input_shape=(1, 28, 28)))
+model.add(Conv2D(32, (3, 3), border_mode='same', input_shape=(1, 28, 28)))
 model.add(Activation("relu"))
 model.add(MaxPooling2D(pool_size=(3, 3), border_mode='same'))
 
-model.add(Convolution2D(64, 3, 3, border_mode='same'))
+model.add(Conv2D(64, (3, 3), border_mode='same'))
 model.add(Activation("relu"))
 model.add(MaxPooling2D(pool_size=(3, 3), border_mode='same'))
 
@@ -61,7 +61,7 @@ model.compile(loss='categorical_crossentropy',
 
 start = time.time()  # 処理時間の計測開始
 training = model.fit(data_train, label_train_binary,
-                     nb_epoch=100, batch_size=100, verbose=1)
+                     epochs=100, batch_size=100, verbose=1)
 training_time = time.time() - start
 with open("classifiers/keras_cnn", "wb") as fout:
     import pickle
